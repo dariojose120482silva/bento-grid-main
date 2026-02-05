@@ -243,19 +243,26 @@ strong {
   grid-area: grid-item-06;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  /* Alinha o conteúdo à esquerda */
+  gap: 1rem;
+  /* Espaço entre o título e a área de scroll */
   background-color: hsl(20, 60%, 99%);
   box-shadow: hsla(30, 3%, 12%, 0.401) 0px 0px 10px;
   line-height: 0.95;
-  /* Ajuste conforme necessário */
-  padding: 0.2rem;
+  padding: 0.5rem 0;
+  min-width: 0;
+  /* OBRIGATÓRIO*/
+  /* Apenas padding vertical */
+  max-width: 100%;
+  overflow: hidden;
+  /* Garante que o conteúdo interno não vaze */
 }
 
 .h2-06 {
   font-size: 2.0rem;
   font-weight: 500;
-  align-self: flex-start;
+  /* align-self: flex-start; <- Não é mais necessário */
   /* Alinha o título à esquerda */
   text-align: left;
   /* Garante que o texto dentro dele também aponte para a esquerda */
@@ -265,11 +272,99 @@ strong {
   max-width: 250px;
 }
 
-.img-06 {
+.horizontal-scroll {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  /* Ocupa a largura do card */
+  overflow-x: scroll;
+  /* Força a barra de rolagem a aparecer/funcionar */
+  overflow-y: hidden;
+  /* Evita scroll vertical indesejado */
+  padding: 20px;
 
-  width: 90%;
-  /* Ajuste conforme necessário */
+  /* Importante para layout de scroll */
+  white-space: nowrap;
 }
+
+
+
+/* Garante que o card pai não quebre o scroll */
+
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 8px 10px;
+  /* O padding que você pediu */
+  border-radius: 30px;
+  /* Bordas de 8px */
+  border: 1px solid #ddd;
+  /* --- A CHAVE DO PROBLEMA --- */
+  flex-shrink: 0;
+  /* Isso impede que o botão diminua. Ele VAI transbordar. */
+  /* --------------------------- */
+  flex-shrink: 0;
+  /* OBRIGATÓRIO: impede que o botão encolha ou quebre */
+  min-width: 200px;
+  /* Largura mínima para forçar o overflow */
+  border: none;
+  background-color: rgb(245, 234, 213);
+  text-decoration: none;
+  /* Remove o sublinhado padrão */
+}
+
+
+
+.social-button img {
+  background-color: rgb(245, 181, 6);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+
+}
+
+
+.text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.handle-followrs {
+  display: inline-flex;
+  /* O container agora só ocupa o tamanho do texto */
+  flex-direction: column;
+  /* Um embaixo do outro */
+  align-items: center;
+  /* Centraliza o de cima com o de baixo */
+  line-height: 1.4;
+}
+
+.handle {
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+  /* Removemos o width: 100% e o text-align: center daqui */
+  font-weight: bold;
+}
+
+.followers {
+  font-size: 18px;
+  color: #7a7a7a;
+
+  align-self: flex-start;
+  /* Se você quiser que o de baixo "puxe" a margem esquerda */
+  /* Ou mantenha apenas o align-items: center no pai para ambos ficarem centralizados entre si */
+}
+
+
 
 .grid-item-07 {
   grid-area: grid-item-07;
@@ -368,6 +463,14 @@ strong {
     /* Reduz o espaçamento interno para ganhar espaço */
   }
 
+  .main-container,
+  .grid-container {
+    padding: 10px;
+    max-width: 100vw;
+    overflow-x: hidden;
+    /* Garante que nada no site cause scroll horizontal lateral */
+  }
+
   .grid-container {
     display: flex;
     flex-direction: column;
@@ -403,6 +506,11 @@ strong {
     text-align: left;
   }
 
+  .img-02 {
+    width: 50%;
+    /* Ajuste conforme necessário */
+  }
+
 
   .p-04 {
     font-size: 1.1rem;
@@ -431,21 +539,143 @@ strong {
   }
 
   .grid-item-06 {
+    grid-area: grid-item-06;
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    align-items: flex-start;
+    /* Alinha o conteúdo à esquerda */
+    gap: 1rem;
+    /* Espaço entre o título e a área de scroll */
+    background-color: hsl(20, 60%, 99%);
+    box-shadow: hsla(30, 3%, 12%, 0.401) 0px 0px 10px;
+    line-height: 0.95;
+    padding: 0.5rem 0;
+    min-width: 0;
+    /* OBRIGATÓRIO*/
+    /* Apenas padding vertical */
+    max-width: 100%;
+    overflow: hidden;
+    /* Garante que o conteúdo interno não vaze */
   }
 
   .h2-06 {
-    font-size: 17px;
-    max-width: 250Px;
-    font-weight: 600;
-    padding: 1rem;
+    font-size: 2.0rem;
+    font-weight: 500;
+    /* align-self: flex-start; <- Não é mais necessário */
+    /* Alinha o título à esquerda */
+    text-align: left;
+    /* Garante que o texto dentro dele também aponte para a esquerda */
+    padding-left: 18px;
+    /* Opcional: para o texto não colar na borda do card */
+    line-height: 1.1;
+    max-width: 250px;
   }
 
-  .img-06 {
+  .horizontal-scroll {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    /* Ocupa a largura do card */
+    overflow-x: scroll;
+    /* Força a barra de rolagem a aparecer/funcionar */
+    overflow-y: hidden;
+    /* Evita scroll vertical indesejado */
+    padding: 20px;
+
+    /* Importante para layout de scroll */
+    white-space: nowrap;
+
+    
+  }
+
+ 
+
+
+
+
+
+
+
+
+  /* Garante que o card pai não quebre o scroll */
+
+
+  .social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 8px 10px;
+    /* O padding que você pediu */
+    border-radius: 30px;
+    /* Bordas de 8px */
+    border: 1px solid #ddd;
+    /* --- A CHAVE DO PROBLEMA --- */
+    flex-shrink: 0;
+    /* Isso impede que o botão diminua. Ele VAI transbordar. */
+    /* --------------------------- */
+    flex-shrink: 0;
+    /* OBRIGATÓRIO: impede que o botão encolha ou quebre */
+    min-width: 200px;
+    /* Largura mínima para forçar o overflow */
+    border: none;
+    background-color: rgb(245, 234, 213);
+    text-decoration: none;
+    /* Remove o sublinhado padrão */
+  }
+
+
+
+  .social-button img {
+    background-color: rgb(245, 181, 6);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+
+  }
+
+
+  .text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  .handle-followrs {
+    display: inline-flex;
+    /* O container agora só ocupa o tamanho do texto */
+    flex-direction: column;
+    /* Um embaixo do outro */
+    align-items: center;
+    /* Centraliza o de cima com o de baixo */
+    line-height: 1.4;
+  }
+
+  .handle {
+    font-size: 18px;
+    font-weight: 700;
+    color: black;
+    /* Removemos o width: 100% e o text-align: center daqui */
+    font-weight: bold;
+  }
+
+  .followers {
+    font-size: 18px;
+    color: #7a7a7a;
+
+    align-self: flex-start;
+    /* Se você quiser que o de baixo "puxe" a margem esquerda */
+    /* Ou mantenha apenas o align-items: center no pai para ambos ficarem centralizados entre si */
+  }
+
+  /* .img-06 {
     width: 60%;
     margin-top: 10px;
-  }
+  }*/
 
   .grid-item-07 {
     display: flex;
@@ -496,6 +726,3 @@ strong {
     height: 70%;
   }
 }
-
-
-/* text-align: left;*/
